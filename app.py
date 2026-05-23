@@ -73,6 +73,8 @@ if menu == "Home":
     col2.metric("Kategori", "Laboratorium")
     col3.metric("Status", "Aktif")
 
-    st.image("Chemistry.jpg", caption="chemisty")
+    st.image("https://share.google/G8moOGxuzdE7JsisA", use_container_width=True
+    )
+
 
     st.success("Kimia adalah ilmu yang penuh eksperimen dan ketelitian.")
