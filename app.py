@@ -15,8 +15,6 @@ body {background-color: #0f172a;}
 
 .main {background: linear-gradient(to right, #0f172a, #1e3a8a);color: white;}
 
-h1, h2, h3 {color: #ffffff;text-shadow: 0px 0px 10px cyan;}
-
 .card {
     background: rgba(255,255,255,0.1);
     padding: 20px;
