@@ -55,7 +55,7 @@ h1, h2, h3 {
 # =========================
 # SIDEBAR
 # =========================
-st.sidebar.title("🧪 Navigasi")
+st.sidebar.title("🧪 Alat Kimia")
 
 menu = st.sidebar.radio(
     "Pilih Menu",
@@ -67,3 +67,31 @@ menu = st.sidebar.radio(
         "Tentang Pembuat"
     ]
 )
+# HOME
+# =========================
+if menu == "Home":
+
+    st.title("🧪 Pengenalan Alat-Alat Laboratorium Kimia")
+
+    st.markdown("""
+    <div class="card">
+    <h3>Selamat Datang</h3>
+    <p>
+    Website ini dibuat untuk membantu mempelajari berbagai alat laboratorium kimia
+    beserta fungsi dan cara penggunaannya.
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Jumlah Alat", "9")
+    col2.metric("Kategori", "Laboratorium")
+    col3.metric("Status", "Aktif")
+
+    st.image(
+        "https://images.unsplash.com/photo-1532187643603-ba119ca4109e",
+        use_container_width=True
+    )
+
+    st.success("Kimia adalah ilmu yang penuh eksperimen dan ketelitian.")
