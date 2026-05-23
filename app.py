@@ -7,26 +7,15 @@ import pandas as pd
 st.set_page_config(
     page_title="Alat Laboratorium Kimia",
     page_icon="🧪",
-    layout="wide"
-)
+    layout="wide")
 # CUSTOM CSS
-# =========================
 st.markdown("""
 <style>
+body {background-color: #0f172a;}
 
-body {
-    background-color: #0f172a;
-}
+.main {background: linear-gradient(to right, #0f172a, #1e3a8a);color: white;}
 
-.main {
-    background: linear-gradient(to right, #0f172a, #1e3a8a);
-    color: white;
-}
-
-h1, h2, h3 {
-    color: #ffffff;
-    text-shadow: 0px 0px 10px cyan;
-}
+h1, h2, h3 {color: #ffffff;text-shadow: 0px 0px 10px cyan;}
 
 .card {
     background: rgba(255,255,255,0.1);
@@ -35,19 +24,14 @@ h1, h2, h3 {
     backdrop-filter: blur(10px);
     box-shadow: 0 0 15px rgba(0,255,255,0.5);
     transition: 0.3s;
-    margin-bottom: 20px;
-}
+    margin-bottom: 20px;}
 
-.card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 25px cyan;
-}
+.card:hover {transform: scale(1.03);
+    box-shadow: 0 0 25px cyan;}
 
-.footer {
-    text-align: center;
+.footer {text-align: center;
     padding: 20px;
-    color: white;
-}
+    color: white;}
 
 </style>
 """, unsafe_allow_html=True)
@@ -75,7 +59,7 @@ if menu == "Home":
 
     st.markdown("""
     <div class="card">
-    <h3>Selamat Datang</h3>
+    <h3>Belajar Alat Lab Yuk!</h3>
     <p>
     Website ini dibuat untuk membantu mempelajari berbagai alat laboratorium kimia
     beserta fungsi dan cara penggunaannya.
@@ -90,8 +74,7 @@ if menu == "Home":
     col3.metric("Status", "Aktif")
 
     st.image(
-        "https://images.unsplash.com/photo-1532187643603-ba119ca4109e",
-        use_container_width=True
+        "https://share.google/21Mw1orPcbBCmYV1F=True
     )
 
     st.success("Kimia adalah ilmu yang penuh eksperimen dan ketelitian.")
