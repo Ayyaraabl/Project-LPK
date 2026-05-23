@@ -26,8 +26,7 @@ h1, h2, h3 {color: #ffffff;text-shadow: 0px 0px 10px cyan;}
     transition: 0.3s;
     margin-bottom: 20px;}
 
-.card:hover {transform: scale(1.03);
-    box-shadow: 0 0 25px cyan;}
+.card:hover {transform: scale(1.03)}
 
 .footer {text-align: center;
     padding: 20px;
