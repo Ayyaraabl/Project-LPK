@@ -7,8 +7,7 @@ import pandas as pd
 st.set_page_config(
     page_title="Laboratorium Kimia",
     page_icon="🧪",
-    layout="wide"
-)
+    layout="wide")
 
 # ==========================
 # CSS MODERN
@@ -16,9 +15,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-.main {
-    background: linear-gradient(135deg,#0f172a,#1e3a8a);
-}
+.main {background: linear-gradient(135deg,#0f172a,#1e3a8a);}
 
 .title {
     text-align:center;
@@ -37,12 +34,6 @@ st.markdown("""
 
 .card:hover{
     transform:scale(1.02);
-}
-
-.footer{
-    text-align:center;
-    margin-top:40px;
-    color:white;
 }
 
 </style>
