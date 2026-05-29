@@ -96,3 +96,41 @@ elif menu == "Daftar Alat":
             <p>{fungsi}</p>
             </div>
             """, unsafe_allow_html=True)
+
+# FUNGSI ALAT
+# =========================
+elif menu == "Fungsi Alat":
+
+    st.title("📋 Fungsi Alat Laboratorium")
+
+    data = {
+        "Nama Alat": [
+            "Gelas Beker",
+            "Erlenmeyer",
+            "Buret",
+            "Pipet Tetes",
+            "Labu Ukur"
+        ],
+
+        "Fungsi": [
+            "Mencampur larutan",
+            "Wadah titrasi",
+            "Mengukur volume",
+            "Mengambil cairan",
+            "Membuat larutan"
+        ],
+
+        "Cara Penggunaan": [
+            "Digunakan untuk mencampur",
+            "Digoyangkan saat titrasi",
+            "Dibaca volume akhirnya",
+            "Ditekan bagian atasnya",
+            "Diisi hingga tanda batas"
+        ]
+    }
+
+    df = pd.DataFrame(data)
+
+    st.dataframe(df, use_container_width=True)
+
+
