@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# =========================
 # KONFIGURASI HALAMAN
-# =========================
 st.set_page_config(
     page_title="Alat Laboratorium Kimia",
     page_icon="🧪",
@@ -33,23 +31,18 @@ body {background-color: #0f172a;}
 </style>
 """, unsafe_allow_html=True)
 
-# =========================
 # SIDEBAR
-# =========================
 st.sidebar.title("Dashboard")
 
 menu = st.sidebar.radio(
     "Pilih Menu",
-    [
-        "Home",
+    [   "Home",
         "Daftar Alat",
         "Fungsi Alat",
         "Kuis Kimia",
-        "Tentang Pembuat"
-    ]
-)
+        "Tentang Pembuat"])
 # HOME
-# =========================
+
 if menu == "Home":
 
     st.title("🧪 Pengenalan Alat-Alat Laboratorium Kimia")
@@ -74,3 +67,32 @@ if menu == "Home":
 
 
     st.success("Kimia adalah ilmu yang penuh eksperimen dan ketelitian.")
+
+# DAFTAR ALAT
+
+elif menu == "Daftar Alat":
+
+    st.title("🔬 Daftar Alat Laboratorium")
+
+    alat = [
+        ("Gelas Beker", "Untuk mencampur larutan"),
+        ("Erlenmeyer", "Untuk titrasi"),
+        ("Buret", "Mengukur volume larutan"),
+        ("Pipet Tetes", "Mengambil cairan"),
+        ("Labu Ukur", "Membuat larutan"),
+        ("Tabung Reaksi", "Tempat reaksi"),
+        ("Corong", "Menyaring larutan"),
+        ("Kaki Tiga", "Penyangga pemanasan"),
+        ("Pembakar Spiritus", "Sumber api")
+    ]
+
+    cols = st.columns(3)
+
+    for i, (nama, fungsi) in enumerate(alat):
+        with cols[i % 3]:
+            st.markdown(f"""
+            <div class="card">
+            <h3>🧪 {nama}</h3>
+            <p>{fungsi}</p>
+            </div>
+            """, unsafe_allow_html=True)
