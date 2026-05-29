@@ -1,220 +1,260 @@
 import streamlit as st
 import pandas as pd
 
+# ==========================
 # KONFIGURASI HALAMAN
+# ==========================
 st.set_page_config(
-    page_title="Alat Laboratorium Kimia",
+    page_title="Laboratorium Kimia",
     page_icon="🧪",
-    layout="wide")
-# CUSTOM CSS
+    layout="wide"
+)
+
+# ==========================
+# CSS MODERN
+# ==========================
 st.markdown("""
 <style>
-body {background-color: #0f172a;}
 
-.main {background: linear-gradient(to right, #0f172a, #1e3a8a);color: white;}
+.main {
+    background: linear-gradient(135deg,#0f172a,#1e3a8a);
+}
+
+.title {
+    text-align:center;
+    color:white;
+    padding:15px;
+}
 
 .card {
-    background: rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 15px rgba(0,255,255,0.5);
-    transition: 0.3s;
-    margin-bottom: 20px;}
+    background: rgba(255,255,255,0.08);
+    padding:20px;
+    border-radius:20px;
+    margin-bottom:15px;
+    backdrop-filter: blur(8px);
+    border:1px solid rgba(255,255,255,0.2);
+}
 
-.card:hover {transform: scale(1.03)}
+.card:hover{
+    transform:scale(1.02);
+}
 
-.footer {text-align: center;
-    padding: 20px;
-    color: white;}
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:white;
+}
 
 </style>
 """, unsafe_allow_html=True)
 
+# ==========================
+# DATABASE ALAT
+# ==========================
+alat_data = {
+    "Nama": [
+        "Gelas Beker",
+        "Erlenmeyer",
+        "Buret",
+        "Pipet Tetes",
+        "Labu Ukur",
+        "Tabung Reaksi",
+        "Corong",
+        "Kaki Tiga",
+        "Pembakar Spiritus"
+    ],
+
+    "Fungsi": [
+        "Mencampur dan memanaskan larutan",
+        "Wadah titrasi",
+        "Mengukur volume titran",
+        "Mengambil cairan dalam jumlah kecil",
+        "Membuat larutan standar",
+        "Tempat berlangsungnya reaksi",
+        "Menyaring larutan",
+        "Penyangga saat pemanasan",
+        "Sumber panas"
+    ]
+}
+
+df = pd.DataFrame(alat_data)
+
+# ==========================
 # SIDEBAR
-st.sidebar.title("Dashboard")
+# ==========================
+st.sidebar.image(
+    "https://cdn-icons-png.flaticon.com/512/2784/2784445.png",
+    width=120
+)
 
-menu = st.sidebar.radio(
-    "Pilih Menu",
-    [   "Home",
+st.sidebar.title("🔬 Menu")
+
+menu = st.sidebar.selectbox(
+    "Pilih Halaman",
+    [
+        "Beranda",
         "Daftar Alat",
-        "Fungsi Alat",
-        "Kuis Kimia",
-        "Tentang Pembuat"])
-# HOME
+        "Pencarian Alat",
+        "Kuis",
+        "Tentang"
+    ]
+)
 
-if menu == "Home":
+# ==========================
+# BERANDA
+# ==========================
+if menu == "Beranda":
 
-    st.title("🧪 Pengenalan Alat-Alat Laboratorium Kimia")
+    st.markdown(
+        "<h1 class='title'>🧪 Laboratorium Kimia Interaktif</h1>",
+        unsafe_allow_html=True
+    )
+
+    st.image(
+        "https://images.unsplash.com/photo-1532187643603-ba119ca4109e",
+        use_container_width=True
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Jumlah Alat", len(df))
+    col2.metric("Kategori", "Laboratorium")
+    col3.metric("Status", "Aktif")
 
     st.markdown("""
     <div class="card">
-    <h3>Belajar Alat Lab Yuk!</h3>
+    <h3>Selamat Datang</h3>
     <p>
-    Website ini dibuat untuk membantu mempelajari berbagai alat laboratorium kimia
-    beserta fungsi dan cara penggunaannya.
+    Website ini berisi pengenalan alat-alat laboratorium kimia,
+    fungsi alat, dan kuis interaktif untuk menguji pemahaman Anda.
     </p>
     </div>
     """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns(3)
-
-    col1.metric("Jumlah Alat", "9")
-    col2.metric("Kategori", "Laboratorium")
-    col3.metric("Status", "Aktif")
-
-    st.image("https://share.google/G8moOGxuzdE7JsisA")
-
-
-    st.success("Kimia adalah ilmu yang penuh eksperimen dan ketelitian.")
-
+# ==========================
 # DAFTAR ALAT
-
+# ==========================
 elif menu == "Daftar Alat":
 
-    st.title("🔬 Daftar Alat Laboratorium")
+    st.title("📋 Daftar Alat Laboratorium")
 
-    alat = [
-        ("Gelas Beker", "Untuk mencampur larutan"),
-        ("Erlenmeyer", "Untuk titrasi"),
-        ("Buret", "Mengukur volume larutan"),
-        ("Pipet Tetes", "Mengambil cairan"),
-        ("Labu Ukur", "Membuat larutan"),
-        ("Tabung Reaksi", "Tempat reaksi"),
-        ("Corong", "Menyaring larutan"),
-        ("Kaki Tiga", "Penyangga pemanasan"),
-        ("Pembakar Spiritus", "Sumber api")
-    ]
+    st.dataframe(
+        df,
+        use_container_width=True,
+        hide_index=True
+    )
 
-    cols = st.columns(3)
+# ==========================
+# PENCARIAN ALAT
+# ==========================
+elif menu == "Pencarian Alat":
 
-    for i, (nama, fungsi) in enumerate(alat):
-        with cols[i % 3]:
-            st.markdown(f"""
-            <div class="card">
-            <h3>🧪 {nama}</h3>
-            <p>{fungsi}</p>
-            </div>
-            """, unsafe_allow_html=True)
+    st.title("🔎 Cari Alat Laboratorium")
 
-# FUNGSI ALAT
-# =========================
-elif menu == "Fungsi Alat":
+    keyword = st.text_input(
+        "Masukkan nama alat"
+    )
 
-    st.title("📋 Fungsi Alat Laboratorium")
+    if keyword:
 
-    data = {
-        "Nama Alat": [
-            "Gelas Beker",
-            "Erlenmeyer",
-            "Buret",
-            "Pipet Tetes",
-            "Labu Ukur"
-        ],
-
-        "Fungsi": [
-            "Mencampur larutan",
-            "Wadah titrasi",
-            "Mengukur volume",
-            "Mengambil cairan",
-            "Membuat larutan"
-        ],
-
-        "Cara Penggunaan": [
-            "Digunakan untuk mencampur",
-            "Digoyangkan saat titrasi",
-            "Dibaca volume akhirnya",
-            "Ditekan bagian atasnya",
-            "Diisi hingga tanda batas"
+        hasil = df[
+            df["Nama"].str.contains(
+                keyword,
+                case=False
+            )
         ]
-    }
 
-    df = pd.DataFrame(data)
+        if len(hasil) > 0:
+            st.success("Alat ditemukan")
+            st.dataframe(
+                hasil,
+                use_container_width=True,
+                hide_index=True
+            )
+        else:
+            st.error("Alat tidak ditemukan")
 
-    st.dataframe(df, use_container_width=True)
+# ==========================
 # KUIS
-# =========================
-elif menu == "Kuis Kimia":
+# ==========================
+elif menu == "Kuis":
 
-    st.title("📝 Kuis Laboratorium Kimia")
+    st.title("📝 Kuis Kimia")
 
     score = 0
 
     q1 = st.radio(
-        "1. Alat untuk titrasi adalah...",
-        ["Pipet Tetes", "Erlenmeyer", "Corong"]
+        "1. Alat yang digunakan pada titrasi?",
+        ["Corong", "Erlenmeyer", "Tabung Reaksi"]
     )
 
     q2 = st.radio(
-        "2. Fungsi buret adalah...",
-        ["Mengukur volume", "Memanaskan", "Menyaring"]
+        "2. Fungsi buret?",
+        ["Mengukur volume larutan",
+         "Menyaring larutan",
+         "Memanaskan larutan"]
     )
 
     q3 = st.radio(
-        "3. Alat untuk pemanasan adalah...",
-        ["Pembakar Spiritus", "Labu Ukur", "Buret"]
+        "3. Fungsi pipet tetes?",
+        ["Mengambil cairan",
+         "Mengukur massa",
+         "Memanaskan"]
     )
 
-    q4 = st.radio(
-        "4. Pipet tetes digunakan untuk...",
-        ["Mengambil cairan", "Memanaskan", "Menimbang"]
-    )
-
-    q5 = st.radio(
-        "5. Tabung reaksi digunakan untuk...",
-        ["Tempat reaksi", "Menimbang", "Mengukur massa"]
-    )
-
-    if st.button("Submit Jawaban"):
+    if st.button("Periksa Jawaban"):
 
         if q1 == "Erlenmeyer":
-            score += 20
+            score += 1
 
-        if q2 == "Mengukur volume":
-            score += 20
+        if q2 == "Mengukur volume larutan":
+            score += 1
 
-        if q3 == "Pembakar Spiritus":
-            score += 20
+        if q3 == "Mengambil cairan":
+            score += 1
 
-        if q4 == "Mengambil cairan":
-            score += 20
+        nilai = score / 3 * 100
 
-        if q5 == "Tempat reaksi":
-            score += 20
+        st.subheader(f"Nilai Anda : {nilai:.0f}")
 
-        st.success(f"Nilai Anda: {score}")
-
-        if score >= 80:
+        if nilai == 100:
             st.balloons()
-            st.success(
-                "Hebat! Anda memahami alat laboratorium kimia."
-            )
+            st.success("Sempurna 🎉")
+        elif nilai >= 70:
+            st.success("Bagus 👍")
         else:
-            st.warning("Tetap semangat belajar kimia!")
+            st.warning("Perlu belajar lagi 📚")
 
-# =========================
-# TENTANG PEMBUAT
-# =========================
-elif menu == "Tentang Pembuat":
+# ==========================
+# TENTANG
+# ==========================
+elif menu == "Tentang":
 
     st.title("👨‍🔬 Tentang Pembuat")
 
     st.markdown("""
     <div class="card">
-    <h3>Data Pembuat</h3>
-    <p><b>Nama:</b> Nama Anda</p>
-    <p><b>Jurusan:</b> Kimia</p>
-    <p><b>Tujuan:</b> Membuat media pembelajaran alat laboratorium kimia.</p>
-    <p><b>GitHub:</b> github.com/usernameanda</p>
+    <h3>Profil</h3>
+
+    Nama : Nama Anda
+
+    Program Studi : Kimia
+
+    Tujuan :
+    Membuat media pembelajaran interaktif
+    mengenai alat laboratorium kimia.
+
+    Teknologi :
+    Python + Streamlit
     </div>
     """, unsafe_allow_html=True)
 
-# =========================
+# ==========================
 # FOOTER
-# =========================
+# ==========================
 st.markdown("""
-<div class="footer">
-© 2026 Website Laboratorium Kimia | Dibuat dengan Streamlit 🧪
+<div class='footer'>
+© 2026 Laboratorium Kimia Interaktif | Dibuat dengan Streamlit 🧪
 </div>
 """, unsafe_allow_html=True)
 
