@@ -18,7 +18,7 @@ alat_data = [
         "nama": "Gelas Beker",
         "emoji": "🥛",
         "kategori": "Wadah",
-        "foto": "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=600&q=80",
+        "foto": "WhatsApp Image 2026-05-29 at 16.46.30.jpeg",
         "fungsi": "Wadah serbaguna untuk mencampur, memanaskan, dan menyimpan larutan kimia.",
         "penjelasan_awam": (
             "Bayangkan ini seperti gelas minum biasa, tapi terbuat dari kaca khusus tahan panas. "
