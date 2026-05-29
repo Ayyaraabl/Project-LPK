@@ -35,9 +35,7 @@ st.markdown("""
 .card:hover{
     transform:scale(1.02);
 }
-
-</style>
-""", unsafe_allow_html=True)
+""")
 
 # ==========================
 # DATABASE ALAT
