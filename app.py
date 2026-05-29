@@ -179,51 +179,140 @@ elif menu == "Pencarian Alat":
 # ==========================
 elif menu == "Kuis":
 
-    st.title("📝 Kuis Kimia")
+    st.title("🧪 Kuis Laboratorium Kimia")
 
-    score = 0
+    soal = [
+        {
+            "pertanyaan": "Alat yang digunakan untuk mengukur volume larutan secara teliti pada titrasi adalah...",
+            "opsi": ["Erlenmeyer", "Buret", "Gelas Beker", "Corong"],
+            "jawaban": "Buret"
+        },
 
-    q1 = st.radio(
-        "1. Alat yang digunakan pada titrasi?",
-        ["Corong", "Erlenmeyer", "Tabung Reaksi"]
-    )
+        {
+            "pertanyaan": "Fungsi utama labu ukur adalah...",
+            "opsi": [
+                "Menyaring larutan",
+                "Membuat larutan dengan volume tertentu",
+                "Memanaskan larutan",
+                "Mengukur massa"
+            ],
+            "jawaban": "Membuat larutan dengan volume tertentu"
+        },
 
-    q2 = st.radio(
-        "2. Fungsi buret?",
-        ["Mengukur volume larutan",
-         "Menyaring larutan",
-         "Memanaskan larutan"]
-    )
+        {
+            "pertanyaan": "Alat yang digunakan untuk mengambil sedikit cairan adalah...",
+            "opsi": [
+                "Pipet Tetes",
+                "Corong",
+                "Buret",
+                "Kaki Tiga"
+            ],
+            "jawaban": "Pipet Tetes"
+        },
 
-    q3 = st.radio(
-        "3. Fungsi pipet tetes?",
-        ["Mengambil cairan",
-         "Mengukur massa",
-         "Memanaskan"]
-    )
+        {
+            "pertanyaan": "Pembakar spiritus berfungsi sebagai...",
+            "opsi": [
+                "Penyaring",
+                "Pengukur volume",
+                "Sumber panas",
+                "Penyimpan larutan"
+            ],
+            "jawaban": "Sumber panas"
+        },
 
-    if st.button("Periksa Jawaban"):
+        {
+            "pertanyaan": "Tabung reaksi digunakan untuk...",
+            "opsi": [
+                "Tempat berlangsungnya reaksi",
+                "Mengukur massa",
+                "Menyaring larutan",
+                "Menimbang sampel"
+            ],
+            "jawaban": "Tempat berlangsungnya reaksi"
+        }
+    ]
 
-        if q1 == "Erlenmeyer":
-            score += 1
+    jawaban_user = []
 
-        if q2 == "Mengukur volume larutan":
-            score += 1
+    progress = 0
 
-        if q3 == "Mengambil cairan":
-            score += 1
+    for i, item in enumerate(soal):
 
-        nilai = score / 3 * 100
+        st.subheader(f"Soal {i+1}")
 
-        st.subheader(f"Nilai Anda : {nilai:.0f}")
+        pilihan = st.radio(
+            item["pertanyaan"],
+            item["opsi"],
+            key=i
+        )
 
-        if nilai == 100:
+        jawaban_user.append(pilihan)
+
+        progress += 1
+
+        st.progress(progress / len(soal))
+
+    st.divider()
+
+    if st.button("📊 Selesai dan Lihat Nilai"):
+
+        skor = 0
+
+        st.subheader("Hasil Kuis")
+
+        for i, item in enumerate(soal):
+
+            if jawaban_user[i] == item["jawaban"]:
+                skor += 20
+
+                st.success(
+                    f"Soal {i+1}: Benar ✅"
+                )
+
+            else:
+                st.error(
+                    f"Soal {i+1}: Salah ❌"
+                )
+
+                st.info(
+                    f"Jawaban yang benar: {item['jawaban']}"
+                )
+
+        st.divider()
+
+        st.metric(
+            "Nilai Akhir",
+            f"{skor}/100"
+        )
+
+        if skor >= 90:
+            predikat = "A (Sangat Baik)"
             st.balloons()
-            st.success("Sempurna 🎉")
-        elif nilai >= 70:
-            st.success("Bagus 👍")
+
+        elif skor >= 80:
+            predikat = "B (Baik)"
+
+        elif skor >= 70:
+            predikat = "C (Cukup)"
+
         else:
-            st.warning("Perlu belajar lagi 📚")
+            predikat = "D (Perlu Belajar Lagi)"
+
+        st.success(
+            f"Predikat Anda: {predikat}"
+        )
+
+        st.progress(skor / 100)
+
+        if skor == 100:
+            st.balloons()
+            st.success(
+                "🎉 Selamat! Semua jawaban benar."
+            )
+
+    if st.button("🔄 Ulangi Kuis"):
+        st.rerun()
 
 # ==========================
 # TENTANG
