@@ -36,7 +36,7 @@ body {background-color: #0f172a;}
 # =========================
 # SIDEBAR
 # =========================
-st.sidebar.title("🧪 Alat Kimia")
+st.sidebar.title("Dashboard")
 
 menu = st.sidebar.radio(
     "Pilih Menu",
